@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "projects": {
+    "task-manager": {
+      "projectType": "application",
+      "root": "apps/task-manager",
+      "sourceRoot": "apps/task-manager/src",
+      "prefix": "task-manager",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/task-manager",
+            "index": "apps/task-manager/src/index.html",
+            "main": "apps/task-manager/src/main.ts",
+            "polyfills": "apps/task-manager/src/polyfills.ts",
+            "tsConfig": "apps/task-manager/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/task-manager/src/favicon.ico",
+              "apps/task-manager/src/assets"
+            ],
+            "styles": ["apps/task-manager/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/task-manager/src/environments/environment.ts",
+                  "with": "apps/task-manager/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "task-manager:build:production"
+            },
+            "development": {
+              "browserTarget": "task-manager:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "task-manager:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/task-manager/src/**/*.ts",
+              "apps/task-manager/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/task-manager"],
+          "options": {
+            "jestConfig": "apps/task-manager/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "task-manager-api": {
+      "root": "apps/task-manager-api",
+      "sourceRoot": "apps/task-manager-api/src",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/task-manager-api",
+            "main": "apps/task-manager-api/src/main.ts",
+            "tsConfig": "apps/task-manager-api/tsconfig.app.json",
+            "assets": ["apps/task-manager-api/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/task-manager-api/src/environments/environment.ts",
+                  "with": "apps/task-manager-api/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "task-manager-api:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/task-manager-api/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/task-manager-api"],
+          "options": {
+            "jestConfig": "apps/task-manager-api/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "task-manager-e2e": {
+      "root": "apps/task-manager-e2e",
+      "sourceRoot": "apps/task-manager-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/task-manager-e2e/cypress.json",
+            "devServerTarget": "task-manager:serve:development",
+            "tsConfig": "apps/task-manager-e2e/tsconfig.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "task-manager:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/task-manager-e2e/**/*.{js,ts}"]
+          }
+        }
+      },
+      "tags": [],
+      "implicitDependencies": ["task-manager"]
+    }
+  }
+}
