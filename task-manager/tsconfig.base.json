@@ -14,7 +14,12 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@task-manager/database": ["libs/database/src/index.ts"],
+      "@task-manager/task-commands": ["libs/task-commands/src/index.ts"],
+      "@task-manager/task-queries": ["libs/task-queries/src/index.ts"],
+      "@task-manager/validators": ["libs/validators/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

@@ -1,6 +1,52 @@
 {
   "version": 1,
   "projects": {
+    "database": {
+      "root": "libs/database",
+      "sourceRoot": "libs/database/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/database/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/database"],
+          "options": {
+            "jestConfig": "libs/database/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "task-commands": {
+      "root": "libs/task-commands",
+      "sourceRoot": "libs/task-commands/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/task-commands/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/task-commands"],
+          "options": {
+            "jestConfig": "libs/task-commands/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
     "task-manager": {
       "projectType": "application",
       "root": "apps/task-manager",
@@ -175,6 +221,52 @@
       },
       "tags": [],
       "implicitDependencies": ["task-manager"]
+    },
+    "task-queries": {
+      "root": "libs/task-queries",
+      "sourceRoot": "libs/task-queries/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/task-queries/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/task-queries"],
+          "options": {
+            "jestConfig": "libs/task-queries/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "validators": {
+      "root": "libs/validators",
+      "sourceRoot": "libs/validators/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/validators/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/validators"],
+          "options": {
+            "jestConfig": "libs/validators/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
     }
   }
 }
